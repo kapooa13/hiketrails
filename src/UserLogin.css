@@ -1,0 +1,27 @@
+.home__body {
+  flex: 1;
+  display: flex;
+  margin-top: 12.5%;
+  flex-direction: column;
+}
+
+.home__body > img {
+  object-fit: contain;
+  height: 100px;
+}
+
+.home__inputContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+@media all and (min-width: 480px) {
+  .Login {
+    padding: 60px 0;
+  }
+
+  .Login form {
+    margin: 0 auto;
+    max-width: 320px;
+  }
+}
