@@ -18,7 +18,7 @@ import {
 
 import Stack from '@mui/material/Stack';
 
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import { AppBar, Box, Fab, Toolbar, Typography, Button } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
@@ -110,6 +110,10 @@ function Home() {
 }
 
 function App() {
+
+  useEffect(() => {
+    document.title = 'HikeTrails'
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
