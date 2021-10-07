@@ -1,7 +1,10 @@
 import './App.css';
+import HTLogo from './hiketrails-logo-cropped.svg';
 
 import Search from './Search';
 import UserLogin from './UserLogin';
+import SubmissionPage from './SubmissionPage';
+import SampleObject from './SampleObject';
 import DrawerComponent from './NavbarDrawer';
 import useMediaQuery from '@mui/material/useMediaQuery'
 
@@ -15,27 +18,22 @@ import {
 import Stack from '@mui/material/Stack';
 
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-
+import { AppBar, Box, Fab, Toolbar, Typography, Button, SvgIcon, Icon } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 
 const theme = createTheme({
   palette: {
     primary: {
-      light: '#757ce8',
-      main: '#3f50b5',
-      dark: '#002884',
+      light: '#5BB973',
+      main: '#32a850',
+      dark: '#237538',
       contrastText: '#fff',
     },
     secondary: {
-      light: '#ff7961',
-      main: '#f44336',
-      dark: '#ba000d',
+      light: '#60BFDF',
+      main: '#39afd8',
+      dark: '#277A97',
       contrastText: '#000',
     },
   },
@@ -50,9 +48,21 @@ function ButtonAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <Typography align="left" variant="h6" component={Link} to={'/'} style={{ textDecoration: 'none', boxShadow: 'none' }}>
+          {/*<Typography align="left" variant="h6" component={Link} to={'/'} style={{ textDecoration: 'none', boxShadow: 'none' }}>
             HikeTrails
-          </Typography>
+          </Typography>*/}
+          <Fab size="large" variant="extended" color="white" aria-label="edit">
+            {/*HT*/}
+            <div>
+              <img src={HTLogo} alt="logo" width="60px"/>
+            </div>
+            <div color='#32a850'>
+              HT
+{/*              <Typography align="right" color="primary" variant="h6" component={Link} to={'/'} style={{ textDecoration: 'none', boxShadow: 'none' }}>
+                HT
+              </Typography>
+*/}            </div>
+          </Fab>
           <div style={{ flexGrow: 1 }}>
           </div>
           {
@@ -86,17 +96,12 @@ function Results() {
   return Home();
 }
 
-function SampleObject() {
-  return Home();
-}
-
-function SubmissionPage() {
-  return Home();
-}
-
 function Home() {
   return (
     <div className="home__body">
+      <div>
+        <img src={HTLogo} alt="logo" width="210px"/>
+      </div>
       <Typography variant="h2">
         HikeTrails
       </Typography>

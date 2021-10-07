@@ -28,7 +28,7 @@ a:link, a:visited {
 .home__body {
   flex: 1;
   display: flex;
-  margin-top: 12.5%;
+  margin-top: 10%;
   flex-direction: column;
 }
 
