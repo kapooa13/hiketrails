@@ -5,7 +5,6 @@ import {
   ListItemIcon,
   IconButton,
   ListItemText,
-  makeStyles,
   Drawer,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';

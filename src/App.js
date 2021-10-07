@@ -4,6 +4,7 @@ import HTLogo from './hiketrails-logo-mini.svg';
 import Search from './Search';
 import UserLogin from './UserLogin';
 import SubmissionPage from './SubmissionPage';
+import Results from './Results';
 import SampleObject from './SampleObject';
 import DrawerComponent from './NavbarDrawer';
 import useMediaQuery from '@mui/material/useMediaQuery'
@@ -45,7 +46,7 @@ function ButtonAppBar() {
   const isMobileMatch = useMediaQuery("(max-width:700px)");
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ display: 'flex', flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
           <Fab sx={{ width: '105px' }} size="large" variant="extended" color="white" aria-label="edit" component={Link} to={'/'} style={{ textDecoration: 'none', boxShadow: 'none' }}>
@@ -90,10 +91,6 @@ function ButtonAppBar() {
       </AppBar>
     </Box>
   );
-}
-
-function Results() {
-  return Home();
 }
 
 function Home() {

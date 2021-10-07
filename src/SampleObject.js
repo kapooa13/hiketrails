@@ -4,18 +4,13 @@ import {
   Box,
   Card,
   CardMedia,
-  CardContent,
-  Input,
   Rating,
-  Button,
   Typography,
-  TextField,
   useMediaQuery
 } from '@mui/material';
 import { deepOrange, deepPurple } from '@mui/material/colors';
 
 import ChedokeLocationImage from './chedoke-trail-min.png';
-import InspirationalHikeImage from './inspirational-hike.jpeg';
 
 export default function SampleObject() {
 

@@ -1,15 +1,8 @@
 import React from "react";
 import "./Search.css";
-import Button from "@mui/material/Button"
-import TextField from "@mui/material/TextField"
+import { Box, Button, TextField, MenuItem, InputLabel, InputAdornment, FormControl, Select, Rating } from "@mui/material"
 
-import MenuItem from '@mui/material/MenuItem';
-import InputLabel from '@mui/material/InputLabel';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-
-import Box from '@mui/material/Box';
-import Rating from '@mui/material/Rating';
+import SearchIcon from '@mui/icons-material/Search';
 import Link from 'react-router-dom/Link';
 
 const ratings = [
@@ -20,39 +13,56 @@ function Search() {
     <Box
       component="form"
       sx={{
-        '& > :not(style)': { m: 1, width: '30ch' },
+        '& > :not(style)': { m: 1, width: '40ch' },
       }}
       noValidate
       autoComplete="off"
     >
-      <TextField id="outlined-basic" label="Trails" variant="outlined" />
+      <TextField 
+        id="outlined-basic" 
+        label="Trails" 
+        variant="outlined"
+        sx={{
+          maxWidth: '90%'
+        }} 
+        InputProps={{
+          startAdornment: 
+            <InputAdornment position="start">
+              <SearchIcon/>
+            </InputAdornment>,
+        }}
+      />
       <TextField
-        id="outlined-select-currency"
+        id="outlined-select-rating"
         select
         label="Ratings"
+        sx={{
+          maxWidth: '90%'
+        }}
+        defaultValue=''
       // value={currency}
       // onChange={handleChange}
       >
         {ratings.map((rating) => (
-          <MenuItem key={rating} value={rating}>
+          <MenuItem key={rating} value={rating} style={{ width: '100%'}}>
             <Rating name="read-only" value={rating} readOnly />
           </MenuItem>
         ))}
       </TextField>
       <br/>
       <Button 
-        variant="outlined" 
+        variant="contained" 
         type="submit" 
         component={Link} 
         to={'/results'}
-        style={{ textDecoration: 'none', color: '#32a850'}}>
+        style={{ width: 200, textDecoration: 'none', color: 'white', backgroundColor: '#39afd8'}}>
         Search Reviews
       </Button>
       <Button 
-        variant="outlined" 
+        variant="contained" 
         component={Link} 
         to={'/addreview'}
-        style={{ textDecoration: 'none', color: '#32a850'}}>
+        style={{ width: 200, textDecoration: 'none', color: 'white', backgroundColor: '#39afd8'}}>
         Create Review
       </Button>
     </Box>
