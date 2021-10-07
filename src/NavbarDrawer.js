@@ -9,31 +9,37 @@ import {
   Drawer,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      light: '#5BB973',
+      main: '#32a850',
+      dark: '#237538',
+      contrastText: '#fff',
+    },
+    secondary: {
+      light: '#60BFDF',
+      main: '#39afd8',
+      dark: '#277A97',
+      contrastText: '#000',
+    },
+  },
+});
+
 
 const DrawerComponent = () => {
-  const useStyles = makeStyles(theme => ({
-    drawerContainer: {},
-    iconButtonContainer: {
-      marginLeft: 'auto',
-      color: 'white',
-    },
-
-    menuIconToggle: {
-      fontSize: '3rem',
-    },
-  }));
 
   const [openDrawer, setOpenDrawer] = useState(false);
 
-  const classes = useStyles();
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <Drawer
         anchor='right'
-        // classes={{ paper: classes.drawerContainer }}
         onClose={() => setOpenDrawer(false)}
-        open={openDrawer}
-        onOpen={() => setOpenDrawer(true)}>
+        open={openDrawer}>
         <List>
           <ListItem divider button onClick={() => setOpenDrawer(false)}>
             <ListItemIcon>
@@ -66,13 +72,12 @@ const DrawerComponent = () => {
           </ListItem>
         </List>
       </Drawer>
-      {/* Since this is inside our toolbar we can push it to the end of the toolbar */}
       <IconButton
         onClick={() => setOpenDrawer(!openDrawer)}
         disableRipple>
         <MenuIcon />
       </IconButton>
-    </>
+    </ThemeProvider>
   );
 };
 

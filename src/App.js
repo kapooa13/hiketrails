@@ -18,7 +18,7 @@ import {
 import Stack from '@mui/material/Stack';
 
 import * as React from 'react';
-import { AppBar, Box, Fab, Toolbar, Typography, Button, SvgIcon, Icon } from '@mui/material';
+import { AppBar, Box, Fab, Toolbar, Typography, Button } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 
@@ -42,26 +42,26 @@ const theme = createTheme({
 
 function ButtonAppBar() {
 
-  const isMobileMatch = useMediaQuery("(max-width:600px)");
+  const isMobileMatch = useMediaQuery("(max-width:700px)");
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          {/*<Typography align="left" variant="h6" component={Link} to={'/'} style={{ textDecoration: 'none', boxShadow: 'none' }}>
-            HikeTrails
-          </Typography>*/}
-          <Fab size="large" variant="extended" color="white" aria-label="edit">
-            {/*HT*/}
-            <div>
-              <img src={HTLogo} alt="logo" width="60px"/>
-            </div>
-            <div color='#32a850'>
-              HT
-{/*              <Typography align="right" color="primary" variant="h6" component={Link} to={'/'} style={{ textDecoration: 'none', boxShadow: 'none' }}>
-                HT
-              </Typography>
-*/}            </div>
+          <Fab sx={{ width: '105px' }} size="large" variant="extended" color="white" aria-label="edit" component={Link} to={'/'} style={{ textDecoration: 'none', boxShadow: 'none' }}>
+            <Box sx={{ 
+                display: 'flex',
+                alignContent: 'center',
+                justifyContent: 'center',
+                marginTop: '12%'
+              }}>
+              <Box sx={{ display: 'flex'}}>
+                <img src={HTLogo} alt="logo" width="60px"/>
+              </Box >
+              <Box sx={{ display: 'flex', alignContent: 'center', justifyContent: 'center'}} color='#32a850'>
+                <font size="+1"><b> HT </b></font>
+           </Box>
+            </Box>
           </Fab>
           <div style={{ flexGrow: 1 }}>
           </div>
