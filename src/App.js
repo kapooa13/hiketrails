@@ -1,5 +1,5 @@
 import './App.css';
-import HTLogo from './hiketrails-logo-cropped.svg';
+import HTLogo from './hiketrails-logo-mini.svg';
 
 import Search from './Search';
 import UserLogin from './UserLogin';
@@ -56,7 +56,7 @@ function ButtonAppBar() {
                 marginTop: '12%'
               }}>
               <Box sx={{ display: 'flex'}}>
-                <img src={HTLogo} alt="logo" width="60px"/>
+                <img src={HTLogo} alt="logo" width="60px" height="32px"/>
               </Box >
               <Box sx={{ display: 'flex', alignContent: 'center', justifyContent: 'center'}} color='#32a850'>
                 <font size="+1"><b> HT </b></font>
@@ -100,7 +100,7 @@ function Home() {
   return (
     <div className="home__body">
       <div>
-        <img src={HTLogo} alt="logo" width="210px"/>
+        <img src={HTLogo} alt="logo" width="210px" height="89px"/>
       </div>
       <Typography variant="h2">
         HikeTrails

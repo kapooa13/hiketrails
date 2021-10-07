@@ -10,6 +10,7 @@ import Select from '@mui/material/Select';
 
 import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
+import Link from 'react-router-dom/Link';
 
 const ratings = [
 1,2,3,4,5];
@@ -38,9 +39,22 @@ function Search() {
           </MenuItem>
         ))}
       </TextField>
-      <br />
-      <Button variant="outlined" type="submit">Search Reviews</Button>
-      <Button variant="outlined">Create Review</Button>
+      <br/>
+      <Button 
+        variant="outlined" 
+        type="submit" 
+        component={Link} 
+        to={'/results'}
+        style={{ textDecoration: 'none', color: '#32a850'}}>
+        Search Reviews
+      </Button>
+      <Button 
+        variant="outlined" 
+        component={Link} 
+        to={'/addreview'}
+        style={{ textDecoration: 'none', color: '#32a850'}}>
+        Create Review
+      </Button>
     </Box>
     //     <form className="search">
     // {/*      // <div className="search__input">

@@ -23,7 +23,7 @@ export default function SubmissionPage() {
           flexDirection: 'column',
           flexWrap: 'wrap',
           width: '90%',
-          maxWidth: '800px',
+          maxWidth: '900px',
           height: '100%',
           justifyContent: 'center',
           alignContent: 'center'
@@ -75,7 +75,7 @@ export default function SubmissionPage() {
           justifyContent: 'center'
         }}>
           <TextField
-            sx={{ width: '100%', maxWidth: '800px' }}
+            sx={{ width: '100%', maxWidth: '900px' }}
             id="outlined-basic"
             label="Name of trail"
             variant="outlined"
@@ -87,7 +87,7 @@ export default function SubmissionPage() {
           justifyContent: 'center'
         }}>
           <TextField
-            sx={{ width: '100%', maxWidth: '800px' }}
+            sx={{ width: '100%', maxWidth: '900px' }}
             id="outlined-basic"
             label="Description"
             multiline="true"
@@ -102,13 +102,13 @@ export default function SubmissionPage() {
           justifyContent: 'center'
         }}>
           <TextField
-            sx={{ width: '100%', maxWidth: '800px' }}
+            sx={{ width: '100%', maxWidth: '900px' }}
             id="outlined-basic"
             label="Latitude"
             variant="outlined"
           />
           <TextField
-            sx={{ width: '100%', maxWidth: '800px' }}
+            sx={{ width: '100%', maxWidth: '900px' }}
             id="outlined-basic"
             label="Longitude"
             variant="outlined"

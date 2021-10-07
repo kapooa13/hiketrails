@@ -11,6 +11,13 @@
   max-width: 560px;
 }
 
+/*a:link, a:visited {
+  color: #32a850;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}*/
+
 .search__input > input {
   flex: 1;
   padding: 10px 20px;
@@ -28,6 +35,7 @@
 }
 
 .search__buttons {
+  color: #32a850;
   margin-top: 30px;
   display: flex;
   justify-content: center;
