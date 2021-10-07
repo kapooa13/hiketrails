@@ -10,6 +10,7 @@ import {
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useHistory } from 'react-router-dom';
 
 
 const theme = createTheme({
@@ -34,6 +35,12 @@ const DrawerComponent = () => {
 
   const [openDrawer, setOpenDrawer] = useState(false);
 
+  const history = useHistory();
+  const handleClick = (path) => {
+    history.push(path);
+    setOpenDrawer(false);
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <Drawer
@@ -41,27 +48,27 @@ const DrawerComponent = () => {
         onClose={() => setOpenDrawer(false)}
         open={openDrawer}>
         <List>
-          <ListItem divider button onClick={() => setOpenDrawer(false)}>
+          <ListItem divider button onClick={() => handleClick('/addreview')}>
             <ListItemIcon>
-              <ListItemText> Courses</ListItemText>
+              <ListItemText> Add Review</ListItemText>
             </ListItemIcon>
           </ListItem>
 
-          <ListItem divider button onClick={() => setOpenDrawer(false)}>
+          <ListItem divider button onClick={() => handleClick('/results')}>
             <ListItemIcon>
-              <ListItemText> Fees</ListItemText>
+              <ListItemText> Search Results</ListItemText>
             </ListItemIcon>
           </ListItem>
 
-          <ListItem divider button onClick={() => setOpenDrawer(false)}>
+          <ListItem divider button onClick={() => handleClick('/sampleobject')}>
             <ListItemIcon>
-              <ListItemText> Parents Account</ListItemText>
+              <ListItemText> Sample Object</ListItemText>
             </ListItemIcon>
           </ListItem>
 
-          <ListItem divider button onClick={() => setOpenDrawer(false)}>
+          <ListItem divider button onClick={() => handleClick('/login')}>
             <ListItemIcon>
-              <ListItemText> Holidays</ListItemText>
+              <ListItemText> Login</ListItemText>
             </ListItemIcon>
           </ListItem>
 
