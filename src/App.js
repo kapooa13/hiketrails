@@ -19,14 +19,15 @@ import {
   Link
 } from "react-router-dom";
 
-import { 
+import {
   AppBar,
   Box,
-  Fab, 
-  Toolbar, 
-  Typography, 
-  Button, 
-  Stack } from '@mui/material';
+  Fab,
+  Toolbar,
+  Typography,
+  Button,
+  Stack
+} from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 
@@ -57,18 +58,18 @@ function ButtonAppBar() {
       <AppBar position="static">
         <Toolbar>
           <Fab sx={{ width: '105px' }} size="large" variant="extended" color="white" aria-label="edit" component={Link} to={'/'} style={{ textDecoration: 'none', boxShadow: 'none' }}>
-            <Box sx={{ 
-                display: 'flex',
-                alignContent: 'center',
-                justifyContent: 'center',
-                marginTop: '12%'
-              }}>
-              <Box sx={{ display: 'flex'}}>
-                <img src={HTLogo} alt="logo" width="60px" height="32px"/>
+            <Box sx={{
+              display: 'flex',
+              alignContent: 'center',
+              justifyContent: 'center',
+              marginTop: '12%'
+            }}>
+              <Box sx={{ display: 'flex' }}>
+                <img src={HTLogo} alt="logo" width="60px" height="32px" />
               </Box >
-              <Box sx={{ display: 'flex', alignContent: 'center', justifyContent: 'center'}} color='#32a850'>
+              <Box sx={{ display: 'flex', alignContent: 'center', justifyContent: 'center' }} color='#32a850'>
                 <font size="+1"><b> HT </b></font>
-           </Box>
+              </Box>
             </Box>
           </Fab>
           <div style={{ flexGrow: 1 }}>
@@ -104,7 +105,7 @@ function Home() {
   return (
     <div className="home__body">
       <div>
-        <img src={HTLogo} alt="logo" width="210px" height="89px"/>
+        <img src={HTLogo} alt="logo" width="210px" height="89px" />
       </div>
       <Typography variant="h2">
         HikeTrails
@@ -127,28 +128,28 @@ function App() {
       <Router>
         <div className="App">
           <ButtonAppBar />
-            <div className="container">
-              <Switch>
-                <Route path="/results">
-                  <ResultsSample />
-                </Route>
-                <Route path='/sampleobject'>
-                  <SampleObject />
-                </Route>
-                <Route path='/addreview'>
-                  <Submission />
-                </Route>
-                <Route path='/login'>
-                  <Registration />
-                </Route>
-                <Route path='/'>
-                  <Home />
-                </Route>
-              </Switch>
-            </div>
-            <div className="footer">
-              <Footer/>
-            </div>
+          <div className="container">
+            <Switch>
+              <Route path="/results">
+                <ResultsSample />
+              </Route>
+              <Route path='/sampleobject'>
+                <SampleObject />
+              </Route>
+              <Route path='/addreview'>
+                <Submission />
+              </Route>
+              <Route path='/login'>
+                <Registration />
+              </Route>
+              <Route path='/'>
+                <Home />
+              </Route>
+            </Switch>
+          </div>
+          <div className="footer">
+            <Footer />
+          </div>
         </div>
       </Router>
     </ThemeProvider>

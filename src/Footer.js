@@ -1,13 +1,11 @@
 import React from 'react';
 
-function Footer() {
+export default function Footer() {
 	return (
-		<div style={{ backgroundColor: '#32a850', minHeight: '30px', width: '100%'}}>
+		<div style={{ backgroundColor: '#32a850', minHeight: '30px', width: '100%' }}>
 			<small style={{ color: '#fff' }}>
 				&copy; Copyright 2021, HikeTrails
 			</small>
 		</div>
 	);
 }
-
-export default Footer;
