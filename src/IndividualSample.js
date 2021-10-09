@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import { deepOrange, deepPurple } from '@mui/material/colors';
 
-import ChedokeLocationImage from './chedoke-trail-min.png';
+import ChedokeLocationImage from './assets/chedoke-trail-min.png';
 
 export default function SampleObject() {
 

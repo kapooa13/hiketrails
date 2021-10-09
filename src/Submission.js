@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Box, Input, Rating, Button, Typography, TextField, useMediaQuery } from '@mui/material';
 
-export default function SubmissionPage() {
+export default function Submission() {
 
   const [value, setValue] = React.useState(0);
   const isMobileMatch = useMediaQuery("(max-width:600px)");

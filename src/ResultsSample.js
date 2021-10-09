@@ -1,5 +1,4 @@
 import React from "react";
-
 import {
   Box,
   Grid,
@@ -11,15 +10,14 @@ import {
   InputAdornment,
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import ChedokeLocationImage from './chedoke-trail-min.png';
-import InspirationalHikeImage from './inspirational-hike.jpeg';
+import ChedokeLocationImage from './assets/chedoke-trail-min.png';
+import InspirationalHikeImage from './assets/inspirational-hike.jpeg';
 
-function Results() {
+export default function ResultsSample() {
   return (
     <Grid container>
       <Grid item xs={12} md={4} style={{ height: '90vh', overflow: 'auto' }}>
         <div style={{
-          // marginTop: '2%',
           padding: '15px'
         }}>
           <TextField
@@ -242,39 +240,6 @@ function Results() {
         </div>
       </Grid>
     </Grid>
-
-    // {/*
-    // <div style={{
-    //   height: '90vh',
-    //   backgroundImage: `url(${ChedokeLocationImage})`
-    // }}>
-    //      <Box sx={{
-    //      	width: '22%',
-    //      	display: 'flex',
-    //      	padding: '15px',
-    //      	border: 1
-    //      }}>
-    // <TextField
-    //   id="outlined-basic"
-    //   label="Trails"
-    //   variant="outlined"
-    //   sx={{
-    //     width: '100%',
-    //     background: '#fff'
-    //   }}
-    //   InputProps={{
-    //     startAdornment:
-    //       <InputAdornment position="start">
-    //         <SearchIcon />
-    //       </InputAdornment>,
-    //   }}
-    // />
-    //   </Box>   
-    // // </div> */}
-
-
   );
 }
-
-export default Results;
 

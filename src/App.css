@@ -2,6 +2,27 @@
   text-align: center;
 }
 
+.flex-wrapper {
+  display: flex;
+  min-height: 91vh;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.footer {
+    width: 100%;
+    position:fixed;
+    bottom:0;
+}
+
+.container
+{
+    min-height: 70%;
+    min-height: -webkit-calc(100% - 30px);
+    min-height: -moz-calc(100% - 30px);
+    min-height: calc(100% - 30px);
+}
+
 .home__button {
   padding-right: 10px;
   padding-left: 10px;
@@ -44,7 +65,6 @@ a:link, a:visited {
 
 .App-header {
   background-color: #282c34;
-  /*min-height: 100vh;*/
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -53,15 +73,3 @@ a:link, a:visited {
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}

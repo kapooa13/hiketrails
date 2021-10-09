@@ -30,7 +30,7 @@ const theme = createTheme({
 });
 
 
-const DrawerComponent = () => {
+const NavbarDrawer = () => {
 
   const [openDrawer, setOpenDrawer] = useState(false);
 
@@ -87,4 +87,4 @@ const DrawerComponent = () => {
   );
 };
 
-export default DrawerComponent;
+export default NavbarDrawer;

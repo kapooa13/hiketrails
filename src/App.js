@@ -1,13 +1,16 @@
-import './App.css';
-import HTLogo from './hiketrails-logo-mini.svg';
+import React, { useEffect } from 'react';
 
+import './App.css';
 import Search from './Search';
-import UserLogin from './UserLogin';
-import SubmissionPage from './SubmissionPage';
-import Results from './Results';
-import SampleObject from './SampleObject';
-import DrawerComponent from './NavbarDrawer';
+import Footer from './Footer';
+import Submission from './Submission';
+import NavbarDrawer from './NavbarDrawer';
+import Registration from './Registration';
+import ResultsSample from './ResultsSample';
+import SampleObject from './IndividualSample';
 import useMediaQuery from '@mui/material/useMediaQuery'
+
+import HTLogo from './assets/hiketrails-logo-mini.svg';
 
 import {
   BrowserRouter as Router,
@@ -16,10 +19,14 @@ import {
   Link
 } from "react-router-dom";
 
-import Stack from '@mui/material/Stack';
-
-import React, { useEffect } from 'react';
-import { AppBar, Box, Fab, Toolbar, Typography, Button } from '@mui/material';
+import { 
+  AppBar,
+  Box,
+  Fab, 
+  Toolbar, 
+  Typography, 
+  Button, 
+  Stack } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 
@@ -69,7 +76,7 @@ function ButtonAppBar() {
           {
             isMobileMatch ? (
 
-              <DrawerComponent />
+              <NavbarDrawer />
             ) : (
               <Stack spacing={2} direction="row">
 
@@ -120,23 +127,28 @@ function App() {
       <Router>
         <div className="App">
           <ButtonAppBar />
-          <Switch>
-            <Route path="/results">
-              <Results />
-            </Route>
-            <Route path='/sampleobject'>
-              <SampleObject />
-            </Route>
-            <Route path='/addreview'>
-              <SubmissionPage />
-            </Route>
-            <Route path='/login'>
-              <UserLogin />
-            </Route>
-            <Route path='/'>
-              <Home />
-            </Route>
-          </Switch>
+            <div className="container">
+              <Switch>
+                <Route path="/results">
+                  <ResultsSample />
+                </Route>
+                <Route path='/sampleobject'>
+                  <SampleObject />
+                </Route>
+                <Route path='/addreview'>
+                  <Submission />
+                </Route>
+                <Route path='/login'>
+                  <Registration />
+                </Route>
+                <Route path='/'>
+                  <Home />
+                </Route>
+              </Switch>
+            </div>
+            <div className="footer">
+              <Footer/>
+            </div>
         </div>
       </Router>
     </ThemeProvider>
