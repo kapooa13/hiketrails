@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { Box, Input, Rating, Button, Typography, TextField, useMediaQuery } from '@mui/material';
 
+// basic submissions page to write review
+// fill in rating name location etc.
+
 export default function Submission() {
 
   const [value, setValue] = React.useState(0);

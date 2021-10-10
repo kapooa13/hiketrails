@@ -5,6 +5,8 @@ import { Box, Button, TextField, MenuItem, InputAdornment, Rating } from "@mui/m
 import SearchIcon from '@mui/icons-material/Search';
 import Link from 'react-router-dom/Link';
 
+// Search bar with ratings dropdown
+
 const ratings = [
 1,2,3,4,5];
 

@@ -12,6 +12,13 @@ import SearchIcon from '@mui/icons-material/Search';
 import ChedokeLocationImage from './assets/chedoke-trail-min.png';
 import InspirationalHikeImage from './assets/inspirational-hike.jpeg';
 
+// sample results with grid for formatting
+
+// if on a sufficiently large screen, we use 4 columns for results
+// and 8 for map
+
+// if on mobile, we use all 12 columns for results and push the map down
+
 export default function ResultsSample() {
   return (
     <Grid container>

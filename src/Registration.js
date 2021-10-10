@@ -6,6 +6,8 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import HTLogo from './assets/hiketrails-logo-mini.svg';
 
+// user login and registration page
+
 export default function Registration() {
   return (
       <div style={{

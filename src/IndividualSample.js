@@ -12,6 +12,10 @@ import { deepOrange, deepPurple } from '@mui/material/colors';
 
 import ChedokeLocationImage from './assets/chedoke-trail-min.png';
 
+// Sample submission with reviews and hardcoded image
+// use box for overall page
+// card and cardmedia for reviews and images
+
 export default function SampleObject() {
 
   const value = 3;
