@@ -40,8 +40,8 @@ export default function Registration() {
           Sign in
         </Typography>
       </div>
-      <TextField id="outlined-basic" style={{ width: '80%'}} label="Username" variant="outlined" type="email"/>
-      <TextField id="outlined-basic" style={{ width: '80%'}} label="Password" variant="outlined" type="password" />
+      <TextField id="username" style={{ width: '80%'}} label="Username" variant="outlined" type="email"/>
+      <TextField id="password" style={{ width: '80%'}} label="Password" variant="outlined" type="password" />
       <Grid container style={{ width: '100%', paddingTop: '5px' }}>
         <Grid item xs={6} md={6}>
           <Button color="primary" variant="outlined" style={{ marginBottom: '30px'}}>

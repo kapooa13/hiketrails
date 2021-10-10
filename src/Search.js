@@ -1,6 +1,6 @@
 import React from "react";
 import "./Search.css";
-import { Box, Button, TextField, MenuItem, InputLabel, InputAdornment, FormControl, Select, Rating } from "@mui/material"
+import { Box, Button, TextField, MenuItem, InputAdornment, Rating } from "@mui/material"
 
 import SearchIcon from '@mui/icons-material/Search';
 import Link from 'react-router-dom/Link';
