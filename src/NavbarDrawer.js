@@ -33,8 +33,10 @@ const theme = createTheme({
 
 const NavbarDrawer = () => {
 
+  // used to open and close drawer when user clicks on it
   const [openDrawer, setOpenDrawer] = useState(false);
 
+  // deals with history and where to go when click on link
   const history = useHistory();
   const handleClick = (path) => {
     history.push(path);
@@ -47,36 +49,33 @@ const NavbarDrawer = () => {
         anchor='right'
         onClose={() => setOpenDrawer(false)}
         open={openDrawer}>
+      {/* List of items in Navbar */}
         <List>
+          {/* Add review component opens '/addreview' route on clicking */}
           <ListItem divider button onClick={() => handleClick('/addreview')}>
             <ListItemIcon>
               <ListItemText> Add Review</ListItemText>
             </ListItemIcon>
           </ListItem>
-
+          {/* Search results component opens '/results' route on clicking */}
           <ListItem divider button onClick={() => handleClick('/results')}>
             <ListItemIcon>
               <ListItemText> Search Results</ListItemText>
             </ListItemIcon>
           </ListItem>
-
+          {/* Sample object component opens '/sampleobject' route on clicking */}
           <ListItem divider button onClick={() => handleClick('/sampleobject')}>
             <ListItemIcon>
               <ListItemText> Sample Object</ListItemText>
             </ListItemIcon>
           </ListItem>
-
+          {/* Login component opens '/login' route on clicking */}
           <ListItem divider button onClick={() => handleClick('/login')}>
             <ListItemIcon>
               <ListItemText> Login</ListItemText>
             </ListItemIcon>
           </ListItem>
 
-          <ListItem divider button onClick={() => setOpenDrawer(false)}>
-            <ListItemIcon>
-              <ListItemText> Teachers Account</ListItemText>
-            </ListItemIcon>
-          </ListItem>
         </List>
       </Drawer>
       <IconButton

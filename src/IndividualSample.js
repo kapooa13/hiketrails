@@ -3,14 +3,13 @@ import {
   Avatar,
   Box,
   Card,
-  CardMedia,
   Rating,
   Typography,
   useMediaQuery
 } from '@mui/material';
 import { deepOrange, deepPurple } from '@mui/material/colors';
 
-import ChedokeLocationImage from './assets/chedoke-trail-min.png';
+import SimpleMap from './SimpleMap';
 
 // Sample submission with reviews and hardcoded image
 // use box for overall page
@@ -19,6 +18,7 @@ import ChedokeLocationImage from './assets/chedoke-trail-min.png';
 export default function SampleObject() {
 
   const value = 3;
+  // mobile break point
   const isMobileMatch = useMediaQuery("(max-width:600px)");
 
   return (
@@ -30,10 +30,10 @@ export default function SampleObject() {
       alignContent: 'center',
       marginTop: '5%',
     }}>
+  {/* Box to organize stuff*/}
       <Box
         component="form"
         sx={{
-          // border: 1,
           display: 'flex',
           flexDirection: 'column',
           flexWrap: 'wrap',
@@ -46,6 +46,7 @@ export default function SampleObject() {
         noValidate
         autoComplete="off"
       >
+    {/* conditionally wrap based on mobile */}
         <Box sx={{
           display: 'flex',
           width: '100%',
@@ -85,16 +86,11 @@ export default function SampleObject() {
           padding: '10px',
           justifyContent: 'center'
         }}>
-          <Card sx={{ width: '100%', maxWidth: '900px' }}>
-            <CardMedia
-              component="img"
-              height="auto"
-              image={ChedokeLocationImage}
-              alt="Chedoke Trail Location"
-            />
+          <Card sx={{ maxHeight: '500px' ,width: '100%', maxWidth: '900px' }}>
+          <SimpleMap/>
           </Card>
         </Box>
-
+        {/* Hardcoded user reviews */}
         <Box sx={{
           display: 'flex',
           padding: '10px',
@@ -128,6 +124,7 @@ export default function SampleObject() {
         <Box sx={{
           display: 'flex',
           padding: '10px',
+          paddingBottom: '50px',
           justifyContent: 'center'
         }}>
           <Card sx={{ display: 'flex', width: '100%', maxWidth: '900px' }}>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import configData from "./config.json";
 import GoogleMapReact from 'google-map-react';
 
@@ -18,8 +18,11 @@ const AnyReactComponent = ({ text }) => (
   </div>
 );
 
-class SimpleMap extends Component {
-  static defaultProps = {
+function SimpleMap() {
+
+  // default props for centering map
+
+  let props = {
     center: {
       lat: 43.241941518381964,
       lng: -79.90057843215567
@@ -27,23 +30,22 @@ class SimpleMap extends Component {
     zoom: 12
   };
 
-  render() {
     return (
       <div style={{ height: '88vh', width: '100%' }}>
+        {/* create map component with default props and API key*/}
         <GoogleMapReact
           bootstrapURLKeys={{ key: configData.MAPS_API_KEY }}
-          defaultCenter={this.props.center}
-          defaultZoom={this.props.zoom}
+          defaultCenter={props.center}
+          defaultZoom={props.zoom}
         >
           <AnyReactComponent
-            lat={this.props.center.lat}
-            lng={this.props.center.lng}
+            lat={props.center.lat}
+            lng={props.center.lng}
             text="Chedoke Falls"
           />
         </GoogleMapReact>
       </div>
     );
-  }
 }
 
 export default SimpleMap;

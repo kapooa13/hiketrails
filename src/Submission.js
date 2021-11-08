@@ -6,36 +6,45 @@ import { Box, Input, Rating, Button, Typography, TextField, useMediaQuery } from
 
 export default function Submission() {
 
+  // values and setters for different fields in forms
+  //  useState creates a value and a setter for it that we can use
   const [lat, setLat] = React.useState('');
   const [long, setLong] = React.useState('');
   const [name, setName] = React.useState('');
   const [value, setValue] = React.useState(0);
+  // breakpoint for mobile view
   const isMobileMatch = useMediaQuery("(max-width:600px)");
 
+  // values and setter for conditionally showing validation
   const [nameInvalid, setNameInvalid] = React.useState(0);
   const [latInvalid, setLatInvalid] = React.useState(0);
   const [longInvalid, setLongInvalid] = React.useState(0);
 
+  // name validation function
   function validateName() {
-    setNameInvalid(name == '');
+    setNameInvalid(name === '');
   }
 
+  // latitude valdiation function
   function validateLat() {
     let latValid = -90 <= lat && lat <= 90;
     setLatInvalid(lat === "" || isNaN(lat) || !(latValid));
   }
 
+  // longitude validation function
   function validateLong() {
     let longValid = -180 <= long && long <= 180;
     setLongInvalid(long === "" || isNaN(long) || !(longValid));
   }
 
+  // rating validation function
   function validateRating() {
-    if (value == 0) {
+    if (value === 0) {
       alert('Please set a rating!');
     }
   }
 
+  // function to handle submission, calls all validation functions
   function handleSubmission(event) {
     validateName();
     validateLat();
@@ -52,10 +61,10 @@ export default function Submission() {
       alignContent: 'center',
       marginTop: '5%',
     }}>
+      {/* Box to organize form */}
       <Box
         component="form"
         sx={{
-          // border: 1,
           display: 'flex',
           flexDirection: 'column',
           flexWrap: 'wrap',
@@ -76,7 +85,7 @@ export default function Submission() {
           alignContent: 'center',
           justifyContent: 'center'
         }}>
-
+        {/* Heading defined here "Write a review!" */}
           <Box sx={{
             display: 'flex',
             flexGrow: 1,
@@ -87,6 +96,7 @@ export default function Submission() {
               Write a review!
             </Typography>
           </Box>
+        {/* Rating defined below */}
           <Box sx={{
             display: 'flex',
             flexGrow: 1,
@@ -103,6 +113,7 @@ export default function Submission() {
             />
           </Box>
         </Box>
+      {/* Name input field */}
         <Box sx={{
           display: 'flex',
           marginTop: '5%',
@@ -120,6 +131,7 @@ export default function Submission() {
             helperText={nameInvalid ? "Name can't be empty" : ""}
           />
         </Box>
+      {/* Description input field, needs no validation */}
         <Box sx={{
           display: 'flex',
           padding: '10px',
@@ -134,7 +146,7 @@ export default function Submission() {
             variant="outlined"
           />
         </Box>
-
+      {/* Latitude and longitude input field */}
         <Box sx={{
           display: 'flex',
           padding: '10px',
@@ -176,6 +188,7 @@ export default function Submission() {
             </Button>
           </label>
         </Box>
+      {/* Use geolocation API to automatically fill location for user*/}
         <Box sx={{
           display: 'flex',
           padding: '10px',
@@ -194,6 +207,7 @@ export default function Submission() {
           >
             Use current location
           </Button>
+        {/* Submission button calls all validation functions */}
           <Button
             width='20%'
             size='large'

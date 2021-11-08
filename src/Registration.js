@@ -10,17 +10,25 @@ import HTLogo from './assets/hiketrails-logo-mini.svg';
 
 export default function Registration() {
 
+  // values and setters for username and password
   const [user, setUser] = React.useState('');
   const [pass, setPass] = React.useState('');
 
+  // values and setters for error states and conditonally showing errors
   const [userInvalid, setUserInvalid] = React.useState(0);
   const [passInvalid, setPassInvalid] = React.useState(0);
 
+  // username email validator
+  // works using regex
   function validateUser() {
     const regexp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     setUserInvalid(!(regexp.test(user)));
   }
 
+  // password validator
+  // performs client side validation to ensure that
+  //    a) length of password is greater than 8
+  //    b) password contains at least 1 number
   function validatePass() {
     let validLength = pass.length >= 8;
     let containsNumber = /\d/.test(pass);

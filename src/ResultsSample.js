@@ -2,14 +2,15 @@ import React from "react";
 import {
   Grid,
   Card,
+  Button,
   CardMedia,
   Rating,
   TextField,
   Typography,
   InputAdornment,
 } from '@mui/material';
+import { Link } from "react-router-dom";
 import SearchIcon from '@mui/icons-material/Search';
-import ChedokeLocationImage from './assets/chedoke-trail-min.png';
 import InspirationalHikeImage from './assets/inspirational-hike.jpeg';
 
 import SimpleMap from './SimpleMap';
@@ -28,31 +29,45 @@ export default function ResultsSample() {
         <div style={{
           padding: '15px'
         }}>
-          <TextField
-            id="outlined-basic"
-            label="Trails"
-            variant="outlined"
-            sx={{
-              width: '100%',
+          <Grid container>
+            <Grid item xs={8} md={8}>
+              <TextField
+                id="outlined-basic"
+                label="Trails"
+                variant="outlined"
+                sx={{
+                  width: '100%',
+                }}
+                InputProps={{
+                  startAdornment:
+                    <InputAdornment position="start">
+                      <SearchIcon />
+                    </InputAdornment>,
+                }}
+              />
+            </Grid>
+            <Grid item xs={4} md={4}>
+              <Button
+                width='100%'
+                variant='contained'
+                >
+                Submit
+              </Button>
+            </Grid>
+          </Grid>
+        </div>
+
+        <div style={{
+            padding: '15px',
+          }}
+        >
+          <Grid container sx={{
+            padding: '15px',
+            borderRadius: '5px',
+            border: '2px solid #5BB973'
             }}
-            InputProps={{
-              startAdornment:
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>,
-            }}
-          />
-        </div>
-
-        <div style={{
-          padding: '15px',
-        }}>
-          <Grid container sx={{
-            padding: '15px',
-            borderRadius: '5px',
-            border: '2px solid #5BB973'
-          }}>
-            <Grid item xs={4} md={4}>
+          >
+            <Grid item xs={4} md={4}  component={Link} to={'/sampleobject'}>
 
               <Card sx={{
                 width: '100%'
@@ -101,7 +116,7 @@ export default function ResultsSample() {
             borderRadius: '5px',
             border: '2px solid #5BB973'
           }}>
-            <Grid item xs={4} md={4}>
+            <Grid item xs={4} md={4}  component={Link} to={'/sampleobject'}>
 
               <Card sx={{
                 width: '100%'
@@ -150,7 +165,7 @@ export default function ResultsSample() {
             borderRadius: '5px',
             border: '2px solid #5BB973'
           }}>
-            <Grid item xs={4} md={4}>
+            <Grid item xs={4} md={4}  component={Link} to={'/sampleobject'}>
 
               <Card sx={{
                 width: '100%'
@@ -198,7 +213,7 @@ export default function ResultsSample() {
             borderRadius: '5px',
             border: '2px solid #5BB973'
           }}>
-            <Grid item xs={4} md={4}>
+            <Grid item xs={4} md={4}  component={Link} to={'/sampleobject'}>
 
               <Card sx={{
                 width: '100%'
@@ -240,16 +255,13 @@ export default function ResultsSample() {
         
       </Grid>
 
+    {/* Add Map instead of hardcoded image */}
+
       <Grid item xs={12} md={8}>
         <div style={{ height: '90vh'}}>
           <SimpleMap/>
         </div>
-{/*        <div style={{
-          height: '90vh',
-          backgroundImage: `url(${ChedokeLocationImage})`
-        }}>
-        </div>
-*/}      </Grid>
+      </Grid>
     </Grid>
   );
 }

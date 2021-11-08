@@ -41,6 +41,7 @@ const theme = createTheme({
 
 export default function App() {
 
+  //  change name of webpage in browser to HikeTrails
   useEffect(() => {
     document.title = 'HikeTrails'
   }, []);
@@ -51,24 +52,31 @@ export default function App() {
         <div className="App">
           <ButtonAppBar />
           <div className="container">
+        {/* Start defining different routes for different pages/componenets*/}
             <Switch>
+          {/* Path: "/results" opens the 'ResultsSample' component */}
               <Route path="/results">
                 <ResultsSample />
               </Route>
+            {/* Path: '/sampleobject' opens the 'SampleObject' component */}
               <Route path='/sampleobject'>
                 <SampleObject />
               </Route>
+            {/* Path: '/addreview' opens the 'Submission' component */}
               <Route path='/addreview'>
                 <Submission />
               </Route>
+            {/* Path: '/login' opens the 'Registration' component */}
               <Route path='/login'>
                 <Registration />
               </Route>
+            {/* Path: '/' opens the 'Home' component */}
               <Route path='/'>
                 <Home />
               </Route>
             </Switch>
           </div>
+        {/* Footer at the bottom of every page */}
           <div className="footer">
             <Footer />
           </div>

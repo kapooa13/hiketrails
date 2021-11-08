@@ -23,8 +23,10 @@ export default function ButtonAppBar() {
 
   return (
     <Box sx={{ display: 'flex', flexGrow: 1 }}>
+      {/* App bar used at top of screen to display different options*/}
       <AppBar position="static">
         <Toolbar>
+      {/* Boxes to organize the logo*/}
           <Fab sx={{ width: '105px' }} size="large" variant="extended" color="white" aria-label="edit" component={Link} to={'/'} style={{ textDecoration: 'none', boxShadow: 'none' }}>
             <Box sx={{
               display: 'flex',
@@ -48,7 +50,7 @@ export default function ButtonAppBar() {
               <NavbarDrawer />
             ) : (
               <Stack spacing={2} direction="row">
-
+                {/* Links to different componenets in toolbar */}
                 <Button color="secondary" component={Link} to="/addreview">
                   Add Review
                 </Button>

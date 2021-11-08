@@ -12,6 +12,7 @@ const ratings = [
 
 function Search() {
   return (
+    // outer box for form
     <Box
       component="form"
       sx={{
@@ -20,6 +21,7 @@ function Search() {
       noValidate
       autoComplete="off"
     >
+  {/* search text field for user to input along with search icon*/}
       <TextField 
         id="outlined-basic" 
         label="Trails" 
@@ -34,6 +36,7 @@ function Search() {
             </InputAdornment>,
         }}
       />
+    {/* ratings drop down for user to pick ratings*/}
       <TextField
         id="outlined-select-rating"
         select
@@ -42,8 +45,6 @@ function Search() {
           maxWidth: '90%'
         }}
         defaultValue=''
-      // value={currency}
-      // onChange={handleChange}
       >
         {ratings.map((rating) => (
           <MenuItem key={rating} value={rating} style={{ width: '100%'}}>
@@ -52,6 +53,7 @@ function Search() {
         ))}
       </TextField>
       <br/>
+    {/* Button to search review for user*/}
       <Button 
         variant="contained" 
         type="submit" 
@@ -60,6 +62,7 @@ function Search() {
         style={{ width: 200, textDecoration: 'none', color: 'white', backgroundColor: '#39afd8'}}>
         Search Reviews
       </Button>
+    {/* Button to create reviews for user */}
       <Button 
         variant="contained" 
         component={Link} 
@@ -68,33 +71,6 @@ function Search() {
         Create Review
       </Button>
     </Box>
-    //     <form className="search">
-    // {/*      // <div className="search__input">
-    //       //   <SearchIcon className="search__inputIcon" />
-    //       //   <input />
-    //       // </div>
-    // */}      
-    //       <TextField/>
-    //       <FormControl halfWidth>
-    //         <InputLabel id="demo-simple-select-label">Age</InputLabel>
-    //         <Select
-    //           autoWidth='true'
-    //           labelId="demo-simple-select-label"
-    //           id="demo-simple-select"
-    //           // value={age}
-    //           label="Age"
-    //           // onChange={handleChange}
-    //         >
-    //           <MenuItem value={10}>Ten</MenuItem>
-    //           <MenuItem value={20}>Twenty</MenuItem>
-    //           <MenuItem value={30}>Thirty</MenuItem>
-    //         </Select>
-    //       </FormControl>
-    //       <div className="search__buttons">
-    //         <Button variant="outlined" type="submit">Search Reviews</Button>
-    //         <Button variant="outlined">Create Review</Button>
-    //       </div>
-    //     </form>
   );
 }
 
