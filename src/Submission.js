@@ -6,8 +6,42 @@ import { Box, Input, Rating, Button, Typography, TextField, useMediaQuery } from
 
 export default function Submission() {
 
+  const [lat, setLat] = React.useState('');
+  const [long, setLong] = React.useState('');
+  const [name, setName] = React.useState('');
   const [value, setValue] = React.useState(0);
   const isMobileMatch = useMediaQuery("(max-width:600px)");
+
+  const [nameInvalid, setNameInvalid] = React.useState(0);
+  const [latInvalid, setLatInvalid] = React.useState(0);
+  const [longInvalid, setLongInvalid] = React.useState(0);
+
+  function validateName() {
+    setNameInvalid(name == '');
+  }
+
+  function validateLat() {
+    let latValid = -90 <= lat && lat <= 90;
+    setLatInvalid(lat === "" || isNaN(lat) || !(latValid));
+  }
+
+  function validateLong() {
+    let longValid = -180 <= long && long <= 180;
+    setLongInvalid(long === "" || isNaN(long) || !(longValid));
+  }
+
+  function validateRating() {
+    if (value == 0) {
+      alert('Please set a rating!');
+    }
+  }
+
+  function handleSubmission(event) {
+    validateName();
+    validateLat();
+    validateLong();
+    validateRating();
+  }
 
   return (
     <div style={{
@@ -68,8 +102,6 @@ export default function Submission() {
               }}
             />
           </Box>
-
-
         </Box>
         <Box sx={{
           display: 'flex',
@@ -78,10 +110,14 @@ export default function Submission() {
           justifyContent: 'center'
         }}>
           <TextField
+            error={nameInvalid}
             sx={{ width: '100%', maxWidth: '900px' }}
             id="outlined-basic"
             label="Name of trail"
             variant="outlined"
+            value={name}
+            onChange={event => setName(event.target.value)}
+            helperText={nameInvalid ? "Name can't be empty" : ""}
           />
         </Box>
         <Box sx={{
@@ -105,16 +141,24 @@ export default function Submission() {
           justifyContent: 'center'
         }}>
           <TextField
+            error={latInvalid}
             sx={{ width: '100%', maxWidth: '900px' }}
             id="outlined-basic"
             label="Latitude"
             variant="outlined"
+            value={lat}
+            onChange={event => setLat(event.target.value)}
+            helperText={latInvalid ? "Enter a valid latitude between -90 and 90" : ""}
           />
           <TextField
+            error={longInvalid}
             sx={{ width: '100%', maxWidth: '900px' }}
             id="outlined-basic"
             label="Longitude"
             variant="outlined"
+            value={long}
+            onChange={event => setLong(event.target.value)}
+            helperText={longInvalid ? "Enter a valid longitude between -180 and 180" : ""}
           />
         </Box>
         <Box sx={{
@@ -140,7 +184,22 @@ export default function Submission() {
           <Button
             width='20%'
             size='large'
-            variant='contained'>
+            variant='contained'
+            onClick={() => {
+              navigator.geolocation.getCurrentPosition(function(position) {
+                setLat(position.coords.latitude);
+                setLong(position.coords.longitude);
+              });
+            }}
+          >
+            Use current location
+          </Button>
+          <Button
+            width='20%'
+            size='large'
+            variant='contained'
+            onClick={event => handleSubmission(event)}
+            >
             Submit
           </Button>
         </Box>
