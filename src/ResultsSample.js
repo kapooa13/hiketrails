@@ -12,6 +12,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import ChedokeLocationImage from './assets/chedoke-trail-min.png';
 import InspirationalHikeImage from './assets/inspirational-hike.jpeg';
 
+import SimpleMap from './SimpleMap';
+
 // sample results with grid for formatting
 
 // if on a sufficiently large screen, we use 4 columns for results
@@ -239,12 +241,15 @@ export default function ResultsSample() {
       </Grid>
 
       <Grid item xs={12} md={8}>
-        <div style={{
+        <div style={{ height: '90vh'}}>
+          <SimpleMap/>
+        </div>
+{/*        <div style={{
           height: '90vh',
           backgroundImage: `url(${ChedokeLocationImage})`
         }}>
         </div>
-      </Grid>
+*/}      </Grid>
     </Grid>
   );
 }
