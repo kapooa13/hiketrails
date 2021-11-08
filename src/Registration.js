@@ -9,6 +9,29 @@ import HTLogo from './assets/hiketrails-logo-mini.svg';
 // user login and registration page
 
 export default function Registration() {
+
+  const [user, setUser] = React.useState('');
+  const [pass, setPass] = React.useState('');
+
+  const [userInvalid, setUserInvalid] = React.useState(0);
+  const [passInvalid, setPassInvalid] = React.useState(0);
+
+  function validateUser() {
+    const regexp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    setUserInvalid(!(regexp.test(user)));
+  }
+
+  function validatePass() {
+    let validLength = pass.length >= 8;
+    let containsNumber = /\d/.test(pass);
+    setPassInvalid(!(validLength && containsNumber));
+  }
+
+  function handleSubmission() {
+    validateUser();
+    validatePass();
+  }
+
   return (
       <div style={{
           position: 'absolute', 
@@ -42,16 +65,44 @@ export default function Registration() {
           Sign in
         </Typography>
       </div>
-      <TextField id="username" style={{ width: '80%'}} label="Username" variant="outlined" type="email"/>
-      <TextField id="password" style={{ width: '80%'}} label="Password" variant="outlined" type="password" />
+      <TextField
+        error={userInvalid}
+        id="username" 
+        style={{ width: '80%'}} 
+        label="User Email" 
+        variant="outlined" 
+        type="email"
+        value={user}
+        onChange={event => setUser(event.target.value)}
+        helperText={userInvalid ? "Please enter a valid email" : ""}
+      />
+      <TextField 
+        error={passInvalid}
+        id="password" 
+        style={{ width: '80%'}} 
+        label="Password" 
+        variant="outlined" 
+        type="password"
+        value={pass}
+        onChange={event => setPass(event.target.value)}
+        helperText={passInvalid ? "Please enter a password with minimum 8 characters and 1 number" : ""}
+      />
       <Grid container style={{ width: '100%', paddingTop: '5px' }}>
         <Grid item xs={6} md={6}>
-          <Button color="primary" variant="outlined" style={{ marginBottom: '30px'}}>
+          <Button 
+            color="primary" 
+            variant="outlined" 
+            style={{ marginBottom: '30px'}}
+            onClick={event => handleSubmission(event)}>
             Register 
           </Button>
         </Grid>
         <Grid item xs={6} md={6}>
-          <Button color="primary" variant="contained" style={{ marginBottom: '30px'}}>
+          <Button 
+            color="primary" 
+            variant="contained" 
+            style={{ marginBottom: '30px'}}
+            onClick={event => handleSubmission(event)}>
             Login
           </Button>
         </Grid>
