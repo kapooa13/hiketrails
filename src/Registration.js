@@ -6,13 +6,20 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import HTLogo from './assets/hiketrails-logo-mini.svg';
 
+import { postRequest } from './Backend';
+import UserProfile from './UserProfile';
+
+import { useHistory } from "react-router-dom";
 // user login and registration page
 
 export default function Registration() {
 
+  const history = useHistory();
+
   // values and setters for username and password
   const [user, setUser] = React.useState('');
   const [pass, setPass] = React.useState('');
+  const [value, setValue] = React.useState(0);
 
   // values and setters for error states and conditonally showing errors
   const [userInvalid, setUserInvalid] = React.useState(0);
@@ -35,9 +42,42 @@ export default function Registration() {
     setPassInvalid(!(validLength && containsNumber));
   }
 
-  function handleSubmission() {
+  function validateFields() {
     validateUser();
     validatePass();
+  }
+
+  function handleRegistration() {
+    validateFields();
+    if (!userInvalid && !passInvalid) {
+      postRequest({ 'username' : user, 'password' : pass }, 'register.php').then(
+        (response) => {
+          console.log(response);
+        }
+        ,
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+  }
+
+  function handleLogin() {
+    validateFields();
+    if (!userInvalid && !passInvalid) {
+      postRequest({ 'username' : user, 'password' : pass }, 'login.php').then(
+        (response) => {
+          UserProfile.setName(response.data.username);
+          UserProfile.setUserId(response.data.user_id);
+          UserProfile.setLoggedIn(response.data.successful);
+          setValue(value + 1);
+          history.push('/', {}); }
+        ,
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
   }
 
   return (
@@ -101,7 +141,7 @@ export default function Registration() {
             color="primary" 
             variant="outlined" 
             style={{ marginBottom: '30px'}}
-            onClick={event => handleSubmission(event)}>
+            onClick={event => handleRegistration(event)}>
             Register 
           </Button>
         </Grid>
@@ -110,7 +150,7 @@ export default function Registration() {
             color="primary" 
             variant="contained" 
             style={{ marginBottom: '30px'}}
-            onClick={event => handleSubmission(event)}>
+            onClick={event => handleLogin(event)}>
             Login
           </Button>
         </Grid>

@@ -1,16 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Search.css";
 import { Box, Button, TextField, MenuItem, InputAdornment, Rating } from "@mui/material"
 
+import { useHistory
+ } from "react-router-dom";
+
 import SearchIcon from '@mui/icons-material/Search';
-import Link from 'react-router-dom/Link';
 
 // Search bar with ratings dropdown
 
-const ratings = [
-1,2,3,4,5];
+const ratings = [1,2,3,4,5];
 
 function Search() {
+
+  const [searchTerm, setSearchTerm] = useState('');
+  const [rating, setRating] = useState(0);
+  const [searchEmpty, setSearchEmpty] = useState(false);
+
+  function validateSearch() {
+    const validSearch = searchTerm === '';
+    setSearchEmpty(validSearch);
+    return validSearch
+  }
+
+  const history = useHistory();
+  const redirectSearchResults = (data) => {
+    const invalidSearch = validateSearch()
+    if (!invalidSearch) {
+      history.push('/results', { 'data' : data, 'ratings' : false });
+    }
+  }
+  const redirectRatingResults = (data) => {
+    history.push('/results', { 'data' : data, 'ratings' : true });
+  }
+
   return (
     // outer box for form
     <Box
@@ -23,7 +46,8 @@ function Search() {
     >
   {/* search text field for user to input along with search icon*/}
       <TextField 
-        id="outlined-basic" 
+        error={searchEmpty}
+        id="search-field" 
         label="Trails" 
         variant="outlined"
         sx={{
@@ -35,6 +59,8 @@ function Search() {
               <SearchIcon/>
             </InputAdornment>,
         }}
+        value={searchTerm}
+        onChange={(event) => {setSearchTerm(event.target.value)}}
       />
     {/* ratings drop down for user to pick ratings*/}
       <TextField
@@ -47,7 +73,8 @@ function Search() {
         defaultValue=''
       >
         {ratings.map((rating) => (
-          <MenuItem key={rating} value={rating} style={{ width: '100%'}}>
+          <MenuItem key={rating} value={rating} style={{ width: '100%'}} 
+            onClick={(event) => { setRating(rating)}}>
             <Rating name="read-only" value={rating} readOnly />
           </MenuItem>
         ))}
@@ -56,19 +83,25 @@ function Search() {
     {/* Button to search review for user*/}
       <Button 
         variant="contained" 
-        type="submit" 
-        component={Link} 
-        to={'/results'}
+        type="button" 
+        onClick = {
+          () => {
+            redirectSearchResults(searchTerm);
+          }
+      }
         style={{ width: 200, textDecoration: 'none', color: 'white', backgroundColor: '#39afd8'}}>
-        Search Reviews
+        Search By Name
       </Button>
     {/* Button to create reviews for user */}
       <Button 
         variant="contained" 
-        component={Link} 
-        to={'/addreview'}
+        onClick = {
+          () => {
+            redirectRatingResults(rating);
+          }
+        }
         style={{ width: 200, textDecoration: 'none', color: 'white', backgroundColor: '#39afd8'}}>
-        Create Review
+        Search By Rating
       </Button>
     </Box>
   );

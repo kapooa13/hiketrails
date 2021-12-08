@@ -8,6 +8,7 @@ import ButtonAppBar from './ButtonAppbar';
 import Registration from './Registration';
 import ResultsSample from './ResultsSample';
 import SampleObject from './IndividualSample';
+import AddReview from './AddReview';
 
 
 import {
@@ -62,9 +63,13 @@ export default function App() {
               <Route path='/sampleobject'>
                 <SampleObject />
               </Route>
+            {/* Path: '/addtrail' opens the 'Submission' component */}
+              <Route path='/addtrail'>
+                <Submission />
+              </Route>
             {/* Path: '/addreview' opens the 'Submission' component */}
               <Route path='/addreview'>
-                <Submission />
+                <AddReview />
               </Route>
             {/* Path: '/login' opens the 'Registration' component */}
               <Route path='/login'>

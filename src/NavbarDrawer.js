@@ -52,21 +52,9 @@ const NavbarDrawer = () => {
       {/* List of items in Navbar */}
         <List>
           {/* Add review component opens '/addreview' route on clicking */}
-          <ListItem divider button onClick={() => handleClick('/addreview')}>
+          <ListItem divider button onClick={() => handleClick('/addtrail')}>
             <ListItemIcon>
               <ListItemText> Add Review</ListItemText>
-            </ListItemIcon>
-          </ListItem>
-          {/* Search results component opens '/results' route on clicking */}
-          <ListItem divider button onClick={() => handleClick('/results')}>
-            <ListItemIcon>
-              <ListItemText> Search Results</ListItemText>
-            </ListItemIcon>
-          </ListItem>
-          {/* Sample object component opens '/sampleobject' route on clicking */}
-          <ListItem divider button onClick={() => handleClick('/sampleobject')}>
-            <ListItemIcon>
-              <ListItemText> Sample Object</ListItemText>
             </ListItemIcon>
           </ListItem>
           {/* Login component opens '/login' route on clicking */}

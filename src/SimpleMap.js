@@ -2,7 +2,15 @@ import React from 'react';
 import configData from "./config.json";
 import GoogleMapReact from 'google-map-react';
 
-const AnyReactComponent = ({ text }) => (
+import { useHistory
+ } from "react-router-dom";
+
+
+
+function SimpleMap({data}) {
+
+  const history = useHistory();
+  const AnyReactComponent = ({ text, item }) => (
   <div style={{
     color: 'white', 
     background: 'green',
@@ -13,14 +21,16 @@ const AnyReactComponent = ({ text }) => (
     justifyContent: 'center',
     borderRadius: '100%',
     transform: 'translate(-50%, -50%)'
-  }}>
+  }}
+    onClick = {() => { 
+      history.push('/sampleobject', { data: item })
+    }
+  }
+  >
     {text}
   </div>
 );
 
-function SimpleMap() {
-
-  // default props for centering map
 
   let props = {
     center: {
@@ -30,7 +40,25 @@ function SimpleMap() {
     zoom: 12
   };
 
-    return (
+  function createMapMarker(item) {
+    // console.log(item);
+    return <AnyReactComponent
+      lat={item.latitude}
+      lng={item.longitude}
+      text={item.name}
+      item={item}
+    />
+  }
+
+  function generateMapMarkers(data) {
+    if (data) {
+      return data.map((item, idx) => createMapMarker(item));
+    } else {
+      return <div></div>;
+    }
+  }
+
+  return (
       <div style={{ height: '88vh', width: '100%' }}>
         {/* create map component with default props and API key*/}
         <GoogleMapReact
@@ -38,11 +66,7 @@ function SimpleMap() {
           defaultCenter={props.center}
           defaultZoom={props.zoom}
         >
-          <AnyReactComponent
-            lat={props.center.lat}
-            lng={props.center.lng}
-            text="Chedoke Falls"
-          />
+          {generateMapMarkers(data)}
         </GoogleMapReact>
       </div>
     );

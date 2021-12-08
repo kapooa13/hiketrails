@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
   Avatar,
   Box,
+  Button,
   Card,
   Rating,
   Typography,
@@ -9,7 +10,13 @@ import {
 } from '@mui/material';
 import { deepOrange, deepPurple } from '@mui/material/colors';
 
+import { useHistory
+ } from "react-router-dom";
+
 import SimpleMap from './SimpleMap';
+import UserProfile from './UserProfile';
+import { postRequest } from './Backend';
+
 
 // Sample submission with reviews and hardcoded image
 // use box for overall page
@@ -17,9 +24,86 @@ import SimpleMap from './SimpleMap';
 
 export default function SampleObject() {
 
-  const value = 3;
+  const history = useHistory();
+  const trail_data = history.location.state.data;
+  const [reviewData, setReviewData] = React.useState([]);
+  const isLoggedIn = React.useState(UserProfile.getLoggedIn());
+  postRequest({ 'trail_id' : trail_data.trail_id }, 'trail_review.php').then(
+    (response) => {
+      if (response.data !== reviewData) {
+        setReviewData(response.data);
+      }
+    }
+    ,
+    (error) => {
+      console.log(error);
+    }
+  );
+  const mapData = [
+    {
+      name: trail_data.name,
+      latitude: trail_data.latitude,
+      longitude: trail_data.longitude,
+    }
+  ];
+
   // mobile break point
   const isMobileMatch = useMediaQuery("(max-width:600px)");
+
+  function handleAddReview() {
+    if (isLoggedIn) {
+      history.push('/addreview', { data: trail_data });
+    } else { // not logged in, send to login
+      history.push('/login', {});
+    }
+  }
+
+  function colourPicker(num) {
+    return (num % 2 === 0 ? deepOrange[500] : deepPurple[500]);
+  }
+
+  function createReview(idx, review) {
+    return <Box sx={{
+          display: 'flex',
+          padding: '10px',
+          paddingBottom: '50px',
+          justifyContent: 'center'
+        }}>
+          <Card sx={{ display: 'flex', width: '100%', maxWidth: '900px' }}>
+            <Box sx={{ display: 'flex', flexDirection: 'row', flexGrow: 1, alignItems: 'center' }}>
+              <Box sx={{
+                width: '20%',
+                display: 'flex',
+                height: 150,
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexDirection: 'column',
+                flexWrap: 'wrap'
+              }}>
+                <Avatar sx={{ width: 70, height: 70, bgcolor: colourPicker(idx) }}>{review.user_name.charAt(0).toUpperCase()}</Avatar>
+                <div style={{ marginTop: '8%' }}>
+                  <b> {review.user_name} </b>
+                </div>
+              </Box>
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <p>
+                  {review.review_content}
+                </p>
+              </Box>
+            </Box>
+          </Card>
+        </Box>
+  }
+
+  function createReviewContent(reviewData) {
+
+    if (Object.keys(reviewData).length !== 0) {
+      return reviewData.map((item, idx) => createReview(idx, item));
+    } else {
+
+      return 
+    }
+  }
 
   return (
     <div style={{
@@ -63,7 +147,7 @@ export default function SampleObject() {
             justifyContent: 'left',
           }}>
             <Typography align="center" variant="h4"  >
-              Chedoke Radial Recreational
+              {trail_data.name}
             </Typography>
           </Box>
           <Box sx={{
@@ -75,7 +159,7 @@ export default function SampleObject() {
           }}>
             <Rating
               name="simple-controlled"
-              value={value}
+              value={trail_data.rating}
               readOnly
             />
           </Box>
@@ -87,69 +171,25 @@ export default function SampleObject() {
           justifyContent: 'center'
         }}>
           <Card sx={{ maxHeight: '500px' ,width: '100%', maxWidth: '900px' }}>
-          <SimpleMap/>
+          <SimpleMap data={mapData}/>
           </Card>
         </Box>
-        {/* Hardcoded user reviews */}
-        <Box sx={{
-          display: 'flex',
-          padding: '10px',
-          justifyContent: 'center'
-        }}>
-          <Card sx={{ display: 'flex', width: '100%', maxWidth: '900px' }}>
-            <Box sx={{ display: 'flex', flexDirection: 'row', flexGrow: 1, alignItems: 'center' }}>
-              <Box sx={{
-                width: '20%',
-                display: 'flex',
-                height: 150,
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexDirection: 'column',
-                flexWrap: 'wrap'
-              }}>
-                <Avatar sx={{ width: 70, height: 70, bgcolor: deepPurple[500] }}>AK</Avatar>
-                <div style={{ marginTop: '8%' }}>
-                  <b> Ankit Kapoor </b>
-                </div>
-              </Box>
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <p>
-                  I went to the place it was nice.
-                </p>
-              </Box>
-            </Box>
-          </Card>
-        </Box>
+        {/* Automatically generated user reviews from database */}
+
+        {createReviewContent(reviewData)}
 
         <Box sx={{
           display: 'flex',
           padding: '10px',
           paddingBottom: '50px',
-          justifyContent: 'center'
+          justifyContent: 'center',
+          alignContent: 'center',
+          minHeight: '50px'
         }}>
-          <Card sx={{ display: 'flex', width: '100%', maxWidth: '900px' }}>
-            <Box sx={{ display: 'flex', flexDirection: 'row', flexGrow: 1, alignItems: 'center' }}>
-              <Box sx={{
-                width: '20%',
-                display: 'flex',
-                height: 150,
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexDirection: 'column',
-                flexWrap: 'wrap'
-              }}>
-                <Avatar sx={{ width: 70, height: 70, bgcolor: deepOrange[500] }}>TA</Avatar>
-                <div style={{ marginTop: '8%' }}>
-                  <b> Tahseen Ahmed </b>
-                </div>
-              </Box>
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <p>
-                  I went to the place it was not nice.
-                </p>
-              </Box>
-            </Box>
-          </Card>
+          <Button variant="contained" type="button" onClick = {() => {handleAddReview()}}
+            style={{ width: 200, textDecoration: 'none', color: 'white', backgroundColor: '#39afd8'}}>
+            Add Review
+          </Button>
         </Box>
 
       </Box>

@@ -1,56 +1,117 @@
 import * as React from 'react';
-import { Box, Input, Rating, Button, Typography, TextField, useMediaQuery } from '@mui/material';
+import { Box, Input, Button, Typography, TextField, useMediaQuery } from '@mui/material';
+
+import { postRequest, uploadImage, DEFAULT_IMAGE } from './Backend';
+
+import { useHistory
+ } from "react-router-dom";
 
 // basic submissions page to write review
 // fill in rating name location etc.
 
 export default function Submission() {
 
+  const history = useHistory();
+
   // values and setters for different fields in forms
   //  useState creates a value and a setter for it that we can use
   const [lat, setLat] = React.useState('');
   const [long, setLong] = React.useState('');
   const [name, setName] = React.useState('');
-  const [value, setValue] = React.useState(0);
+  const [description, setDescription] = React.useState('');
+  const [image, setImage] = React.useState(null);
   // breakpoint for mobile view
   const isMobileMatch = useMediaQuery("(max-width:600px)");
 
   // values and setter for conditionally showing validation
-  const [nameInvalid, setNameInvalid] = React.useState(0);
-  const [latInvalid, setLatInvalid] = React.useState(0);
-  const [longInvalid, setLongInvalid] = React.useState(0);
+  const [nameInvalid, setNameInvalid] = React.useState(false);
+  const [descInvalid, setDescInvalid] = React.useState(false);
+  const [latInvalid, setLatInvalid] = React.useState(false);
+  const [longInvalid, setLongInvalid] = React.useState(false);
 
   // name validation function
   function validateName() {
     setNameInvalid(name === '');
+    return (!(name === ''));
+  }
+
+  // description validation function
+  function validateDesc() {
+    setDescInvalid(description === '');
+    return (!(description === ''));
   }
 
   // latitude valdiation function
   function validateLat() {
     let latValid = -90 <= lat && lat <= 90;
-    setLatInvalid(lat === "" || isNaN(lat) || !(latValid));
+    let updatedLatInvalid = lat === "" || isNaN(lat) || !(latValid);
+    setLatInvalid(updatedLatInvalid);
+    return (!(updatedLatInvalid));
   }
 
   // longitude validation function
   function validateLong() {
     let longValid = -180 <= long && long <= 180;
-    setLongInvalid(long === "" || isNaN(long) || !(longValid));
-  }
-
-  // rating validation function
-  function validateRating() {
-    if (value === 0) {
-      alert('Please set a rating!');
-    }
+    let updatedLongInvalid = long === "" || isNaN(long) || !(longValid);
+    setLongInvalid(updatedLongInvalid);
+    return (!(updatedLongInvalid));
   }
 
   // function to handle submission, calls all validation functions
-  function handleSubmission(event) {
-    validateName();
-    validateLat();
-    validateLong();
-    validateRating();
+  function validateSubmission() {
+    let validName = validateName();
+    let validDesc = validateDesc();
+    let validLat = validateLat();
+    let validLong = validateLong();
+    return (validName && validDesc && validLat && validLong);
   }
+
+  function postInfoToDatabase() {
+    if (image !== null) {
+      uploadImage(image).then(
+        (response) => {
+          uploadHelper(response.data)
+        }
+        ,
+        (error) => {
+          uploadHelper(DEFAULT_IMAGE);
+        }
+      );
+    } else {
+      uploadHelper(DEFAULT_IMAGE);
+    }
+  }
+
+  function uploadHelper(image_url) {
+    let validSubmission = validateSubmission();
+    if (validSubmission) {
+      let postParams = {
+        'lat': lat,
+        'long': long,
+        'trail_name': name,
+        'desc': description,
+        'image_url': image_url
+      };
+      postRequest(postParams, 'add_trail_review.php').then(
+        (response) => {
+          console.log(response);
+          history.push('/results', { data: name });
+        }
+        ,
+        (error) => {
+          console.log(error);
+        }
+      )
+    }
+  }
+
+  function handleSubmission() {
+    let validSubmission = validateSubmission();
+    if (validSubmission) {
+      postInfoToDatabase();
+    }
+  }
+
 
   return (
     <div style={{
@@ -85,7 +146,7 @@ export default function Submission() {
           alignContent: 'center',
           justifyContent: 'center'
         }}>
-        {/* Heading defined here "Write a review!" */}
+        {/* Heading defined here "Add a trail!" */}
           <Box sx={{
             display: 'flex',
             flexGrow: 1,
@@ -93,24 +154,8 @@ export default function Submission() {
             justifyContent: 'left',
           }}>
             <Typography align="center" variant="h4"  >
-              Write a review!
+              Add a trail!
             </Typography>
-          </Box>
-        {/* Rating defined below */}
-          <Box sx={{
-            display: 'flex',
-            flexGrow: 1,
-            alignContent: 'center',
-            justifyContent: isMobileMatch ? 'center' : 'right',
-            marginTop: '1%'
-          }}>
-            <Rating
-              name="simple-controlled"
-              value={value}
-              onChange={(event, newValue) => {
-                setValue(newValue);
-              }}
-            />
           </Box>
         </Box>
       {/* Name input field */}
@@ -138,12 +183,16 @@ export default function Submission() {
           justifyContent: 'center'
         }}>
           <TextField
+            error={descInvalid}
             sx={{ width: '100%', maxWidth: '900px' }}
             id="outlined-basic"
             label="Description"
             multiline="true"
+            value={description}
+            onChange={event => setDescription(event.target.value)}
             minRows="5"
             variant="outlined"
+            helperText={descInvalid ? "Description cannot be empty" : ""}
           />
         </Box>
       {/* Latitude and longitude input field */}
@@ -180,12 +229,14 @@ export default function Submission() {
         }}>
           <label htmlFor="contained-button-file">
             <Input
-              accept="image/*"
-              id="contained-button-file"
-              multiple type="file" />
-            <Button variant="contained" component="span">
-              Upload
-            </Button>
+              accept=".jpeg,.png,.jpg"
+              id="image"
+              name="image"
+              multiple type="file" 
+              onChange={event => 
+                setImage(event.target.files[0])
+              }
+            />
           </label>
         </Box>
       {/* Use geolocation API to automatically fill location for user*/}

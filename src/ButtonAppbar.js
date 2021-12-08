@@ -13,13 +13,45 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 
 import NavbarDrawer from './NavbarDrawer';
 import HTLogo from './assets/hiketrails-logo-mini.svg';
+import UserProfile from './UserProfile';
+import { useHistory } from 'react-router-dom';
 
 // app bar with button when it becomes smaller
 
 export default function ButtonAppBar() {
 
+  const history = useHistory();
   // custom breakpoint for responsive appbar
   const isMobileMatch = useMediaQuery("(max-width:700px)");
+  const [isLoggedIn, setLoggedIn] = React.useState(UserProfile.getLoggedIn());
+
+  function logout() {
+    UserProfile.logout()
+    UserProfile.setLoggedIn(false);
+    setLoggedIn(false);
+    history.push('/', {});
+  }
+
+  function guestView() {
+    return <Stack spacing={2} direction="row">
+                <Button variant="contained" color="secondary" component={Link} to="/login">
+                  Login
+                </Button>
+              </Stack>
+  }
+
+  function loggedInView() {
+    return <Stack spacing={2} direction="row">
+        {/* Links to different componenets in toolbar */}
+          <Button color="secondary" component={Link} to="/addtrail">
+            Add Review
+          </Button>
+        <Button variant="contained" color="secondary" onClick={(event) => {logout()}}>
+          Logout
+        </Button>
+      </Stack>
+  }
+
 
   return (
     <Box sx={{ display: 'flex', flexGrow: 1 }}>
@@ -48,23 +80,7 @@ export default function ButtonAppBar() {
             // if mobile view, then show drawer, otherwise full appbar
             isMobileMatch ? (
               <NavbarDrawer />
-            ) : (
-              <Stack spacing={2} direction="row">
-                {/* Links to different componenets in toolbar */}
-                <Button color="secondary" component={Link} to="/addreview">
-                  Add Review
-                </Button>
-                <Button color="secondary" component={Link} to="/results">
-                  Search Results
-                </Button>
-                <Button color="secondary" component={Link} to="/sampleobject">
-                  Sample Object
-                </Button>
-                <Button variant="contained" color="secondary" component={Link} to="/login">
-                  Login
-                </Button>
-              </Stack>
-            )}
+            ) : (isLoggedIn ? loggedInView() : guestView()) }
         </Toolbar>
       </AppBar>
     </Box>
